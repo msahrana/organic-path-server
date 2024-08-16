@@ -27,10 +27,10 @@ async function run() {
   try {
     const dataCollection = client.db("organicDB").collection("allData");
 
-    // app.get("/all-data", async (req, res) => {
-    //   const result = await dataCollection.find().toArray();
-    //   res.send(result);
-    // });
+    app.get("/all-data", async (req, res) => {
+      const result = await dataCollection.find().toArray();
+      res.send(result);
+    });
 
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
