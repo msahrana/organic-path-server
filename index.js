@@ -25,7 +25,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // const dataCollection = client.db("organicDB").collection("allData");
+    const dataCollection = client.db("organicDB").collection("allData");
 
     // app.get("/all-data", async (req, res) => {
     //   const result = await dataCollection.find().toArray();
