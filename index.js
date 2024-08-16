@@ -16,9 +16,9 @@ app.use(express.json());
 // [db code]
 
 app.get("/", (req, res) => {
-  res.send("SIYANA CARVILA server is running");
+  res.send("Organic Path server is running");
 });
 
 app.listen(port, () => {
-  console.log(`SIYANA CARVILA server is running on port: ${port}`);
+  console.log(`Organic Path server is running on port: ${port}`);
 });
