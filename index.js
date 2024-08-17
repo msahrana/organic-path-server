@@ -50,7 +50,9 @@ async function run() {
     app.get("/data-count", async (req, res) => {
       const filter = req.query.filter;
       const search = req.query.search;
-      let query = {};
+      let query = {
+        product_name: {$regex: search, $options: "i"},
+      };
       if (filter) query.category = filter;
       const count = await dataCollection.countDocuments(query);
       res.send({count});
