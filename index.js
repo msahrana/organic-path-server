@@ -28,13 +28,32 @@ async function run() {
     const dataCollection = client.db("organicDB").collection("allData");
 
     app.get("/all-data", async (req, res) => {
-      const result = await dataCollection.find().toArray();
+      const size = parseInt(req.query.size);
+      const page = parseInt(req.query.page) - 1;
+      const filter = req.query.filter;
+      const sort = req.query.sort;
+      const search = req.query.search;
+      let query = {
+        product_name: {$regex: search, $options: "i"},
+      };
+      if (filter) query.category = filter;
+      let options = {};
+      if (sort) options = {sort: {price: sort === "asc" ? 1 : -1}};
+      const result = await dataCollection
+        .find(query, options)
+        .skip(page * size)
+        .limit(size)
+        .toArray();
       res.send(result);
     });
 
     app.get("/data-count", async (req, res) => {
-      const result = await dataCollection.find().toArray();
-      res.send(result);
+      const filter = req.query.filter;
+      const search = req.query.search;
+      let query = {};
+      if (filter) query.category = filter;
+      const count = await dataCollection.countDocuments(query);
+      res.send({count});
     });
 
     console.log(
