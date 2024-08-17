@@ -32,6 +32,11 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/data-count", async (req, res) => {
+      const result = await dataCollection.find().toArray();
+      res.send(result);
+    });
+
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
